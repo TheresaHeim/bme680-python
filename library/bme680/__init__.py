@@ -27,7 +27,7 @@ class BME680(BME680Data):
 
     """
 
-    def __init__(self, i2c_addr=constants.I2C_ADDR_PRIMARY, i2c_device=None):
+    def __init__(self, i2c_addr=constants.I2C_ADDR_SECONDARY, i2c_device=None):
         """Initialise BME680 sensor instance and verify device presence.
 
         :param i2c_addr: i2c address of BME680
@@ -40,7 +40,7 @@ class BME680(BME680Data):
         self._i2c = i2c_device
         if self._i2c is None:
             import smbus
-            self._i2c = smbus.SMBus(1)
+            self._i2c = smbus.SMBus(4)
 
         self.chip_id = self._get_regs(constants.CHIP_ID_ADDR, 1)
         if self.chip_id != constants.CHIP_ID:
